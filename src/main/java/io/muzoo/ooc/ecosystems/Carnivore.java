@@ -28,18 +28,26 @@ public abstract class Carnivore extends Animal {
         }
         return null;
     }
-    public void hunt(Field currentField, Field updatedField, List newFoxes) {
+    public void hunt(Field currentField, Field updatedField, List newAnimal) {
         incrementAge();
         incrementHunger();
         if (alive) {
             // New foxes are born into adjacent locations.
             int births = breed();
             for (int b = 0; b < births; b++) {
-                Fox newFox = new Fox(false);
-                newFoxes.add(newFox);
-                Location loc = updatedField.randomAdjacentLocation(getLocation());
-                newFox.setLocation(loc);
-                updatedField.place(newFox, loc);
+                if (myClass().equals("Fox")) {
+                    Fox newFox = new Fox(false);
+                    newAnimal.add(newFox);
+                    Location loc = updatedField.randomAdjacentLocation(getLocation());
+                    newFox.setLocation(loc);
+                    updatedField.place(newFox, loc);
+                }else if (myClass().equals("Tiger")){
+                    Tiger newTiger = new Tiger(false);
+                    newAnimal.add(newTiger);
+                    Location loc = updatedField.randomAdjacentLocation(getLocation());
+                    newTiger.setLocation(loc);
+                    updatedField.place(newAnimal, loc);
+                }
             }
             // Move towards the source of food if found.
             Location newLocation = findFood(currentField, getLocation());
@@ -59,5 +67,6 @@ public abstract class Carnivore extends Animal {
     abstract int getRabbitFoodValue();
     abstract int getFoodLevel();
     abstract void setFoodLevel(int foodLevel);
+    abstract String myClass();
 
 }
