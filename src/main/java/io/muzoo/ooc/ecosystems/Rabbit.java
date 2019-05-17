@@ -10,7 +10,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kolling
  * @version 2002.10.28
  */
-public class Rabbit {
+public class Rabbit extends Animal{
     // Characteristics shared by all rabbits (static fields).
 
     // The age at which a rabbit can start to breed.
@@ -26,19 +26,10 @@ public class Rabbit {
 
     // Individual characteristics (instance fields).
 
-    // The rabbit's age.
-    private int age;
-    // Whether the rabbit is alive or not.
     private boolean alive;
     // The rabbit's position
     private Location location;
 
-    /**
-     * Create a new rabbit. A rabbit may be created with age
-     * zero (a new born) or with a random age.
-     *
-     * @param randomAge If true, the rabbit will have a random age.
-     */
     public Rabbit(boolean randomAge) {
         age = 0;
         alive = true;
@@ -46,14 +37,6 @@ public class Rabbit {
             age = rand.nextInt(MAX_AGE);
         }
     }
-
-    /**
-     * This is what the rabbit does most of the time - it runs
-     * around. Sometimes it will breed or die of old age.
-     *
-     * @param updatedField The field to transfer to.
-     * @param newRabbits   A list to add newly born rabbits to.
-     */
     public void run(Field updatedField, List newRabbits) {
         incrementAge();
         if (alive) {
@@ -76,73 +59,41 @@ public class Rabbit {
             }
         }
     }
-
-    /**
-     * Increase the age.
-     * This could result in the rabbit's death.
-     */
-    private void incrementAge() {
-        age++;
-        if (age > MAX_AGE) {
-            alive = false;
-        }
+    @Override
+    int getMaxAge() {
+        return MAX_AGE;
     }
 
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     *
-     * @return The number of births (may be zero).
-     */
-    private int breed() {
-        int births = 0;
-        if (canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
+    @Override
+    int getBreedingAge() {
+        return BREEDING_AGE;
     }
 
-    /**
-     * A rabbit can breed if it has reached the breeding age.
-     *
-     * @return true if the rabbit can breed, false otherwise.
-     */
-    private boolean canBreed() {
-        return age >= BREEDING_AGE;
+    @Override
+    double getBreedingProb() {
+        return BREEDING_PROBABILITY;
     }
 
-    /**
-     * Check whether the rabbit is alive or not.
-     *
-     * @return true if the rabbit is still alive.
-     */
+    @Override
+    int getMaxLitterSize() {
+        return MAX_LITTER_SIZE;
+    }
+
+    @Override
+    Location getLocation() {
+        return location;
+    }
+
     public boolean isAlive() {
         return alive;
     }
-
-    /**
-     * Tell the rabbit that it's dead now :(
-     */
     public void setEaten() {
         alive = false;
     }
-
-    /**
-     * Set the animal's location.
-     *
-     * @param row The vertical coordinate of the location.
-     * @param col The horizontal coordinate of the location.
-     */
-    public void setLocation(int row, int col) {
+    void setLocation(int row, int col) {
         this.location = new Location(row, col);
     }
-
-    /**
-     * Set the rabbit's location.
-     *
-     * @param location The rabbit's location.
-     */
-    public void setLocation(Location location) {
+    void setLocation(Location location) {
         this.location = location;
     }
 }

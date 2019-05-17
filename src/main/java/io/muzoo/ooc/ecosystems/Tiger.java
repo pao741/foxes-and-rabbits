@@ -1,27 +1,15 @@
 package io.muzoo.ooc.ecosystems;
 
-import java.util.List;
-import java.util.Iterator;
 import java.util.Random;
 
-/**
- * A simple model of a fox.
- * Foxes age, move, eat rabbits, and die.
- *
- * @author David J. Barnes and Michael Kolling
- * @version 2002.10.28
- */
-public class Fox extends Carnivore{
-    // Characteristics shared by all foxes (static fields).
-
-    // The age at which a fox can start to breed.
+public class Tiger extends Carnivore{
     private static final int BREEDING_AGE = 10;
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.09;
+    private static final double BREEDING_PROBABILITY = 0.11;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 3;
+    private static final int MAX_LITTER_SIZE = 4;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 4;
@@ -30,17 +18,12 @@ public class Fox extends Carnivore{
 
     // Individual characteristics (instance fields).
 
+    // The fox's position
     private Location location;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
-    /**
-     * Create a fox. A fox can be created as a new born (age zero
-     * and not hungry) or with random age.
-     *
-     * @param randomAge If true, the fox will have random age and hunger level.
-     */
-    public Fox(boolean randomAge) {
+    public Tiger(boolean randomAge) {
         age = 0;
         alive = true;
         if (randomAge) {
