@@ -14,17 +14,16 @@ import java.util.Random;
 public class Fox extends Carnivore{
     // Characteristics shared by all foxes (static fields).
 
-    // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 10;
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.09;
+    private static final double BREEDING_PROBABILITY = 0.11;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 3;
+    private static final int MAX_LITTER_SIZE = 4;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 4;
+    private static final int RABBIT_FOOD_VALUE = 3;
     // A shared random number generator to control breeding.
     private static final Random rand = new Random();
 
@@ -95,4 +94,10 @@ public class Fox extends Carnivore{
     void setFoodLevel(int foodLevel) {
         this.foodLevel = foodLevel;
     }
+
+    @Override
+    String myClass() {
+        return "Fox";
+    }
+
 }

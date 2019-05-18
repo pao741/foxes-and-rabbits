@@ -1,28 +1,37 @@
 package io.muzoo.ooc.ecosystems;
 
+import java.util.List;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Tiger extends Carnivore{
+    // Characteristics shared by all foxes (static fields).
+
     private static final int BREEDING_AGE = 10;
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.11;
+    private static final double BREEDING_PROBABILITY = 0.14;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 4;
+    private static final int RABBIT_FOOD_VALUE = 3;
     // A shared random number generator to control breeding.
     private static final Random rand = new Random();
 
     // Individual characteristics (instance fields).
 
-    // The fox's position
     private Location location;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
+    /**
+     * Create a fox. A fox can be created as a new born (age zero
+     * and not hungry) or with random age.
+     *
+     * @param randomAge If true, the fox will have random age and hunger level.
+     */
     public Tiger(boolean randomAge) {
         age = 0;
         alive = true;
@@ -77,5 +86,10 @@ public class Tiger extends Carnivore{
     @Override
     void setFoodLevel(int foodLevel) {
         this.foodLevel = foodLevel;
+    }
+
+    @Override
+    String myClass() {
+        return "Tiger";
     }
 }
