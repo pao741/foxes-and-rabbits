@@ -2,7 +2,7 @@ package io.muzoo.ooc.ecosystems;
 
 import java.util.Random;
 
-public abstract class Animal {
+public abstract class Animal extends Entities {
     boolean alive;
     int age;
     private static final Random rand = new Random();
@@ -31,6 +31,6 @@ public abstract class Animal {
     abstract double getBreedingProb();
     abstract int getMaxLitterSize();
     abstract Location getLocation();
-    abstract void setLocation(Location location);
-    abstract void setLocation(int row, int col);
+//    abstract void setLocation(Location location);
+//    abstract void setLocation(int row, int col);
 }

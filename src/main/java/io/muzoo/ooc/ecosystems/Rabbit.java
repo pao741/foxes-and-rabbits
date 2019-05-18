@@ -28,7 +28,7 @@ public class Rabbit extends Animal{
 
     private boolean alive;
     // The rabbit's position
-    private Location location;
+//    private Location location;
 
     public Rabbit(boolean randomAge) {
         age = 0;
@@ -90,10 +90,10 @@ public class Rabbit extends Animal{
     public void setEaten() {
         alive = false;
     }
-    void setLocation(int row, int col) {
-        this.location = new Location(row, col);
-    }
-    void setLocation(Location location) {
-        this.location = location;
-    }
+//    void setLocation(int row, int col) {
+//        this.location = new Location(row, col);
+//    }
+//    void setLocation(Location location) {
+//        this.location = location;
+//    }
 }

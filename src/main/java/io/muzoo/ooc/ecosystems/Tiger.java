@@ -22,7 +22,7 @@ public class Tiger extends Carnivore{
 
     // Individual characteristics (instance fields).
 
-    private Location location;
+//    private Location location;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
@@ -43,12 +43,12 @@ public class Tiger extends Carnivore{
             foodLevel = RABBIT_FOOD_VALUE;
         }
     }
-    void setLocation(int row, int col) {
-        this.location = new Location(row, col);
-    }
-    void setLocation(Location location) {
-        this.location = location;
-    }
+//    void setLocation(int row, int col) {
+//        this.location = new Location(row, col);
+//    }
+//    void setLocation(Location location) {
+//        this.location = location;
+//    }
     @Override
     int getMaxAge() {
         return MAX_AGE;

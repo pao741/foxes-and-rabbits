@@ -28,8 +28,6 @@ public class Fox extends Carnivore{
     private static final Random rand = new Random();
 
     // Individual characteristics (instance fields).
-
-    private Location location;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
@@ -49,12 +47,6 @@ public class Fox extends Carnivore{
             // leave age at 0
             foodLevel = RABBIT_FOOD_VALUE;
         }
-    }
-    void setLocation(int row, int col) {
-        this.location = new Location(row, col);
-    }
-    void setLocation(Location location) {
-        this.location = location;
     }
     @Override
     int getMaxAge() {
