@@ -1,7 +1,8 @@
 package io.muzoo.ooc.ecosystems;
 
-public class Entities {
+public abstract class Entities {
     Location location;
+    boolean alive;
 
     void setLocation(int row, int col) {
         this.location = new Location(row, col);
@@ -9,4 +10,5 @@ public class Entities {
     void setLocation(Location location) {
         this.location = location;
     }
+    abstract Location getLocation();
 }

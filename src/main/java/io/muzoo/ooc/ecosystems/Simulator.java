@@ -28,6 +28,8 @@ public class Simulator {
 
     private static final double TIGER_CREATION_PROBABILITY = 0.03;
 
+    private static final double HUNTER_CREATION_PROBABILITY =  0.01;
+
     // The list of animals in the field
     private List animals;
     // The list of animals just born
@@ -71,6 +73,7 @@ public class Simulator {
         view.setColor(Fox.class, Color.blue);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Tiger.class, Color.black);
+        view.setColor(Actor.class, Color.red);
 
         // Setup a valid starting point.
         reset();
@@ -115,7 +118,11 @@ public class Simulator {
             }else if(animal instanceof Tiger) {
                 Tiger tiger = (Tiger) animal;
                 tiger.hunt(field,updatedField,newAnimals);
-            } else {
+            }else if(animal instanceof Hunter){
+                Hunter hunter = (Hunter) animal;
+                hunter.act(field,updatedField);
+            }
+            else {
                 System.out.println("found unknown animal");
             }
         }
@@ -171,6 +178,11 @@ public class Simulator {
                     animals.add(tiger);
                     tiger.setLocation(row,col);
                     field.place(tiger,row,col);
+                }else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY){
+                    Hunter hunter = new Hunter();
+                    animals.add(hunter);
+                    hunter.setLocation(row,col);
+                    field.place(hunter,row,col);
                 }
                 // else leave the location empty.
             }
