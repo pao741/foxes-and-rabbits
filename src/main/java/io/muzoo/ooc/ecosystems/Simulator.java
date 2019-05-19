@@ -73,7 +73,7 @@ public class Simulator {
         view.setColor(Fox.class, Color.blue);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Tiger.class, Color.black);
-        view.setColor(Actor.class, Color.red);
+        view.setColor(Hunter.class, Color.red);
 
         // Setup a valid starting point.
         reset();
@@ -164,22 +164,22 @@ public class Simulator {
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
                 if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Fox fox = new Fox(true);
+                    Fox fox = (Fox) EntitiesFactories.createEntities("Fox",true);
                     animals.add(fox);
                     fox.setLocation(row, col);
                     field.place(fox, row, col);
                 } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Rabbit rabbit = new Rabbit(true);
+                    Rabbit rabbit = (Rabbit) EntitiesFactories.createEntities("Rabbit",true);
                     animals.add(rabbit);
                     rabbit.setLocation(row, col);
                     field.place(rabbit, row, col);
                 }else if(rand.nextDouble() <= TIGER_CREATION_PROBABILITY){
-                    Tiger tiger = new Tiger(true);
+                    Tiger tiger = (Tiger) EntitiesFactories.createEntities("Tiger",true);
                     animals.add(tiger);
                     tiger.setLocation(row,col);
                     field.place(tiger,row,col);
                 }else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY){
-                    Hunter hunter = new Hunter();
+                    Hunter hunter = (Hunter) EntitiesFactories.createEntities("Hunter",true);
                     animals.add(hunter);
                     hunter.setLocation(row,col);
                     field.place(hunter,row,col);
