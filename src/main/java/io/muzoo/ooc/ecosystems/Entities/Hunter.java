@@ -1,4 +1,6 @@
-package io.muzoo.ooc.ecosystems;
+package io.muzoo.ooc.ecosystems.Entities;
+
+import io.muzoo.ooc.ecosystems.Location;
 
 public class Hunter extends Actor {
     private static final int RABBIT_HUNT_VALUE = 1;

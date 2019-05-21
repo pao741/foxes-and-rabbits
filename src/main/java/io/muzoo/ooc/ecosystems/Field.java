@@ -1,9 +1,6 @@
 package io.muzoo.ooc.ecosystems;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Represent a rectangular grid of field positions.
@@ -13,6 +10,7 @@ import java.util.Random;
  * @version 2002.04.09
  */
 public class Field {
+
     private static final Random rand = new Random();
 
     // The depth and width of the field.

@@ -3,6 +3,8 @@ package io.muzoo.ooc.ecosystems;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.text.FieldView;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -15,8 +17,9 @@ import java.util.HashMap;
  * @author David J. Barnes and Michael Kolling
  * @version 2003.12.22
  */
-public class SimulatorView extends JFrame {
+public class SimulatorView extends JFrame implements Observer{
     // Colors used for empty locations.
+    protected ArrayList<Observer> observers = new ArrayList<>();
     private static final Color EMPTY_COLOR = Color.white;
 
     // Color used for objects that have no defined color.
@@ -31,6 +34,7 @@ public class SimulatorView extends JFrame {
     private HashMap colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
+    private Field field;
 
     /**
      * Create a view of the given width and height.
@@ -84,7 +88,43 @@ public class SimulatorView extends JFrame {
      * @param step  Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step, Field field) {
+//    public void showStatus(int step, Field field) {
+//        if (!isVisible())
+//            setVisible(true);
+//
+//        stepLabel.setText(STEP_PREFIX + step);
+//        stats.reset();
+//
+//        fieldView.preparePaint();
+//
+//        for (int row = 0; row < field.getDepth(); row++) {
+//            for (int col = 0; col < field.getWidth(); col++) {
+//                Object animal = field.getObjectAt(row, col);
+//                if (animal != null) {
+//                    stats.incrementCount(animal.getClass());
+//                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+//                } else {
+//                    fieldView.drawMark(col, row, EMPTY_COLOR);
+//                }
+//            }
+//        }
+//        stats.countFinished();
+//
+//        population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
+//        fieldView.repaint();
+//    }
+
+    /**
+     * Determine whether the simulation should continue to run.
+     *
+     * @return true If there is more than one species alive.
+     */
+    public boolean isViable(Field field) {
+        return stats.isViable(field);
+    }
+
+    @Override
+    public void update(int step, Field field) {
         if (!isVisible())
             setVisible(true);
 
@@ -108,15 +148,6 @@ public class SimulatorView extends JFrame {
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
         fieldView.repaint();
-    }
-
-    /**
-     * Determine whether the simulation should continue to run.
-     *
-     * @return true If there is more than one species alive.
-     */
-    public boolean isViable(Field field) {
-        return stats.isViable(field);
     }
 
     /**

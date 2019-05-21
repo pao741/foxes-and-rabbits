@@ -1,17 +1,24 @@
-package io.muzoo.ooc.ecosystems;
+package io.muzoo.ooc.ecosystems.Entities;
 
-import java.util.List;
-import java.util.Iterator;
+import io.muzoo.ooc.ecosystems.Location;
+
 import java.util.Random;
 
-public class Tiger extends Carnivore{
+/**
+ * A simple model of a fox.
+ * Foxes age, move, eat rabbits, and die.
+ *
+ * @author David J. Barnes and Michael Kolling
+ * @version 2002.10.28
+ */
+public class Fox extends Carnivore{
     // Characteristics shared by all foxes (static fields).
 
     private static final int BREEDING_AGE = 10;
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.14;
+    private static final double BREEDING_PROBABILITY = 0.11;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
     // The food value of a single rabbit. In effect, this is the
@@ -21,8 +28,6 @@ public class Tiger extends Carnivore{
     private static final Random rand = new Random();
 
     // Individual characteristics (instance fields).
-
-//    private Location location;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
@@ -32,7 +37,7 @@ public class Tiger extends Carnivore{
      *
      * @param randomAge If true, the fox will have random age and hunger level.
      */
-    public Tiger(boolean randomAge) {
+    public Fox(boolean randomAge) {
         age = 0;
         alive = true;
         if (randomAge) {
@@ -43,12 +48,6 @@ public class Tiger extends Carnivore{
             foodLevel = RABBIT_FOOD_VALUE;
         }
     }
-//    void setLocation(int row, int col) {
-//        this.location = new Location(row, col);
-//    }
-//    void setLocation(Location location) {
-//        this.location = location;
-//    }
     @Override
     int getMaxAge() {
         return MAX_AGE;
@@ -90,6 +89,7 @@ public class Tiger extends Carnivore{
 
     @Override
     String myClass() {
-        return "Tiger";
+        return "Fox";
     }
+
 }

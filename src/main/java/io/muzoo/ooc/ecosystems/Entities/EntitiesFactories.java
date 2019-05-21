@@ -1,4 +1,6 @@
-package io.muzoo.ooc.ecosystems;
+package io.muzoo.ooc.ecosystems.Entities;
+
+import io.muzoo.ooc.ecosystems.Entities.*;
 
 public class EntitiesFactories {
     public static Entities createEntities(String entitesClass, boolean radomAge){

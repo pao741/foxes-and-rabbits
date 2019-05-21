@@ -1,10 +1,8 @@
 package io.muzoo.ooc.ecosystems;
 
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Collections;
+import io.muzoo.ooc.ecosystems.Entities.*;
+
+import java.util.*;
 import java.awt.Color;
 
 /**
@@ -15,6 +13,7 @@ import java.awt.Color;
  * @version 2002.10.28
  */
 public class Simulator {
+    private static ArrayList<Observer> observers;
     // The private static final variables represent 
     // configuration information for the simulation.
     // The default width for the grid.
@@ -69,15 +68,28 @@ public class Simulator {
         updatedField = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
+        observers = new ArrayList<>();
         view = new SimulatorView(depth, width);
         view.setColor(Fox.class, Color.blue);
         view.setColor(Rabbit.class, Color.orange);
         view.setColor(Tiger.class, Color.black);
         view.setColor(Hunter.class, Color.red);
+        observers.add(view);
 
         // Setup a valid starting point.
         reset();
     }
+
+    public void addObservers(Observer observer){
+        observers.add(observer);
+    }
+
+    public void notifyAll(int step, Field field){
+        for(Observer observer: observers){
+            observer.update(step,field);
+        }
+    }
+
 
     /**
      * Run the simulation from its current state for a reasonably long period,
@@ -94,8 +106,11 @@ public class Simulator {
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
+
         }
     }
+
+
 
     /**
      * Run the simulation from its current state for a single step.
@@ -136,7 +151,8 @@ public class Simulator {
         updatedField.clear();
 
         // display the new field on screen
-        view.showStatus(step, field);
+//        view.update(step, field);
+        notifyAll(step,field);
     }
 
     /**
@@ -150,7 +166,8 @@ public class Simulator {
         populate(field);
 
         // Show the starting state in the view.
-        view.showStatus(step, field);
+//        view.update(step, field);
+        notifyAll(step,field);
     }
 
     /**
